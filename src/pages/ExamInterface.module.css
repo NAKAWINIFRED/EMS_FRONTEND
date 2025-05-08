@@ -1,0 +1,547 @@
+.examContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Instructions Page Styles */
+.instructionsContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.universityLogo {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #003366;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 0.5rem;
+}
+
+.instructions {
+  margin: 1.5rem 0;
+  line-height: 1.6;
+}
+
+.startButtonContainer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.startButton {
+  background-color: #003366;
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.startButton:hover {
+  background-color: #002855;
+}
+
+/* Exam Page Styles */
+.examHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #003366;
+  color: white;
+}
+
+.examHeader .universityLogo {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.examTimer {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.examContent {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 60px); /* Adjust based on header height */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sectionNav {
+  margin-bottom: 0.5rem;
+}
+
+.sectionHeader {
+  padding: 0.75rem 1rem;
+  background-color: #e0e0e0;
+  font-weight: bold;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+}
+
+.activeSectionHeader {
+  background-color: #d0d0d0;
+  border-left: 4px solid #003366;
+}
+
+.questionList {
+  padding: 0.5rem 0;
+}
+
+.questionItem {
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+}
+
+.activeQuestion {
+  background-color: #cce5ff;
+  border-left: 4px solid #007bff;
+}
+
+.submitButton {
+  margin-top: auto;
+  background-color: #003366;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 1rem;
+}
+
+.submitButton:hover {
+  background-color: #002855;
+}
+
+/* Question Container Styles */
+.questionContainer {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.questionHeader {
+  margin-bottom: 1.5rem;
+}
+
+.questionType {
+  color: #666;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+.questionContent {
+  flex: 1;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.questionText {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* Multiple Choice Styles */
+.multipleChoiceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.optionItem:hover {
+  background-color: #f8f8f8;
+}
+
+.selectedOption {
+  background-color: #e6f2ff;
+  border-color: #007bff;
+}
+
+.optionLetter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #eee;
+  margin-right: 0.75rem;
+  font-weight: bold;
+}
+
+.selectedOption .optionLetter {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Text Answer Styles */
+.answerTextarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.essayTextarea {
+  min-height: 300px;
+}
+
+.answerTextarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Navigation Styles */
+.questionNavigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.navButton, .saveButton {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.navButton {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.navButton:hover {
+  background-color: #d0d0d0;
+}
+
+.saveButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.saveButton:hover {
+  background-color: #218838;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .examContent {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .questionNavigation {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .navButton, .saveButton {
+    flex: 1;
+  }
+}
+
+/* Proctoring Camera Styles */
+.cameraContainer {
+position: fixed;
+bottom: 20px;
+right: 20px;
+width: 250px;
+background: #f5f5f5;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+z-index: 1000;
+}
+
+.cameraContainer h4 {
+margin: 0 0 10px 0;
+font-size: 16px;
+color: #333;
+}
+
+.cameraFeed {
+width: 100%;
+border-radius: 4px;
+background: #000;
+}
+
+.faceDetectionStatus {
+margin-top: 10px;
+text-align: center;
+font-size: 14px;
+}
+
+.faceDetectionStatus .loading {
+color: #2196F3;
+font-style: italic;
+}
+
+.faceDetectionStatus .error {
+color: #f44336;
+font-weight: 500;
+}
+
+.faceDetectionStatus .detected {
+color: #4CAF50;
+font-weight: 500;
+}
+
+.faceDetectionStatus .notDetected {
+color: #f44336;
+font-weight: 500;
+}
+
+/* Proctoring Status Styles */
+.proctoringStatus {
+margin-top: 20px;
+padding: 15px;
+background: #f8f9fa;
+border-radius: 8px;
+border: 1px solid #dee2e6;
+}
+
+.proctoringStatus h4 {
+margin-top: 0;
+margin-bottom: 15px;
+font-size: 16px;
+color: #495057;
+}
+
+.statusItem {
+display: flex;
+justify-content: space-between;
+margin-bottom: 8px;
+font-size: 14px;
+}
+
+.statusActive {
+color: #28a745;
+}
+
+.statusInactive {
+color: #dc3545;
+}
+
+.statusGood {
+color: #28a745;
+}
+
+.statusWarning {
+color: #ffc107;
+font-weight: bold;
+}
+
+.readyScreen {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-color: #f5f5f5;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+z-index: 9999;
+padding: 2rem;
+text-align: center;
+overflow: hidden;
+}
+
+.instructions {
+max-width: 600px;
+background: white;
+padding: 2rem;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+position: relative;
+z-index: 10000;
+}
+
+.instructions ul {
+text-align: left;
+margin: 1rem 0;
+padding-left: 1.5rem;
+}
+
+.instructions li {
+margin: 0.5rem 0;
+color: #333;
+}
+
+.readyButton {
+background-color: #4CAF50;
+color: white;
+padding: 1rem 2rem;
+border: none;
+border-radius: 4px;
+font-size: 1.1rem;
+cursor: pointer;
+transition: background-color 0.3s;
+margin-top: 1rem;
+position: relative;
+z-index: 10001;
+}
+
+.readyButton:hover {
+background-color: #45a049;
+}
+
+.readyButton:active {
+background-color: #3d8b40;
+}
+
+/* Add styles to prevent scrolling and ensure fullscreen */
+:fullscreen {
+overflow: hidden !important;
+}
+
+:fullscreen .examContainer {
+overflow: hidden !important;
+}
+
+/* Ensure content stays within viewport */
+.examContent {
+height: calc(100vh - 60px); /* Adjust based on header height */
+overflow-y: auto;
+overflow-x: hidden;
+}
+
+/* Prevent any content from being cut off */
+.questionContainer {
+max-width: 100%;
+overflow-x: hidden;
+}
+
+/* Ensure camera feed stays in view */
+.cameraContainer {
+position: fixed;
+bottom: 20px;
+right: 20px;
+width: 250px;
+background: #f5f5f5;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+z-index: 1000;
+}
+
+.tabWarning {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #fff;
+padding: 2rem;
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+z-index: 10000;
+text-align: center;
+max-width: 400px;
+width: 90%;
+animation: fadeIn 0.3s ease-in-out;
+}
+
+.tabWarning h3 {
+color: #d32f2f;
+margin-bottom: 1rem;
+}
+
+.tabWarning p {
+margin-bottom: 1rem;
+color: #333;
+line-height: 1.5;
+}
+
+.tabWarning button {
+background-color: #d32f2f;
+color: white;
+border: none;
+padding: 0.75rem 1.5rem;
+border-radius: 4px;
+cursor: pointer;
+font-size: 1rem;
+transition: background-color 0.3s;
+}
+
+.tabWarning button:hover {
+background-color: #b71c1c;
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translate(-50%, -60%);
+}
+to {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+}

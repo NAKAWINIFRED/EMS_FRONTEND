@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import styles from "./ExamPage.module.css";
 
 
@@ -18,8 +19,15 @@ export default function ExamsPage() {
   const isAccessible = (startTime) => {
     const now = new Date();
     const diff = (startTime - now) / 1000 / 60;
-    return diff <= 10 && diff >= -60; // accessible from 10 minutes before to 1 hour after start
+    return diff <= 10 && diff >= -60; 
   };
+
+  
+    const navigate = useNavigate();
+  
+    const handleStartExam = () => {
+      navigate('/proctoring');
+    };
 
   return (
     <div className={styles.container}>
@@ -39,8 +47,10 @@ export default function ExamsPage() {
           <td>{exam.startTime.toLocaleTimeString()}</td>
           <td>
             {isAccessible(exam.startTime) ? (
-              <button className={styles.button}>Start Exam</button>
-            ) : (
+              <button className={styles.button} onClick={handleStartExam}>Start Exam</button>
+            ) 
+            
+            : (
               <span className={styles.notAvailable}>Not yet available</span>
             )}
           </td>
