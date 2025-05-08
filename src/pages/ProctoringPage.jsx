@@ -793,7 +793,7 @@ export default function ProctoringPage() {
 
   const handleBeginExam = () => {
     if (beginExamEnabled) {
-      navigate('/exam-interface');
+       navigate('/exam-interface');
     } else {
       alert("Please ensure all conditions are met before starting the exam.");
     }
