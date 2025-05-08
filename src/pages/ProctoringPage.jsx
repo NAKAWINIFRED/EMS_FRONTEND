@@ -713,15 +713,15 @@ export default function ProctoringPage() {
     };
   }, [navigate]);
 
-  useEffect(() => {
-    const enablePointerLock = () => {
-      document.body.requestPointerLock?.();
-    };
-    document.addEventListener("click", enablePointerLock);
-    return () => {
-      document.removeEventListener("click", enablePointerLock);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const enablePointerLock = () => {
+  //     document.body.requestPointerLock?.();
+  //   };
+  //   document.addEventListener("click", enablePointerLock);
+  //   return () => {
+  //     document.removeEventListener("click", enablePointerLock);
+  //   };
+  // }, []);
 
   const flagStudent = () => {
     setFlagCount((prev) => {

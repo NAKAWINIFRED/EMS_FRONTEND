@@ -25,8 +25,8 @@
 .universityLogo {
   text-align: center;
   margin-bottom: 1rem;
-  color: #003366;
-  border-bottom: 2px solid #003366;
+  color: #106053;
+  border-bottom: 2px solid #106053;
   padding-bottom: 0.5rem;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .startButton {
-  background-color: #003366;
+  background-color: #106053;
   color: white;
   padding: 0.75rem 2rem;
   border: none;
@@ -53,7 +53,7 @@
 }
 
 .startButton:hover {
-  background-color: #002855;
+  background-color: #004d47;
 }
 
 /* Exam Page Styles */
@@ -62,7 +62,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: #003366;
+  background-color: #106053;
   color: white;
 }
 
@@ -113,7 +113,7 @@
 
 .activeSectionHeader {
   background-color: #d0d0d0;
-  border-left: 4px solid #003366;
+  border-left: 4px solid #106053
 }
 
 .questionList {
@@ -128,12 +128,12 @@
 
 .activeQuestion {
   background-color: #cce5ff;
-  border-left: 4px solid #007bff;
+  border-left: 4px solid #24DABC;
 }
 
 .submitButton {
   margin-top: auto;
-  background-color: #003366;
+  background-color: #106053;
   color: white;
   padding: 0.75rem;
   border: none;
@@ -144,7 +144,7 @@
 }
 
 .submitButton:hover {
-  background-color: #002855;
+  background-color: #004d47;
 }
 
 /* Question Container Styles */
@@ -205,7 +205,7 @@
 
 .selectedOption {
   background-color: #e6f2ff;
-  border-color: #007bff;
+  border-color: #24DABC;
 }
 
 .optionLetter {
@@ -221,7 +221,7 @@
 }
 
 .selectedOption .optionLetter {
-  background-color: #007bff;
+  background-color: #24DABC;
   color: white;
 }
 
@@ -244,7 +244,7 @@
 
 .answerTextarea:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #24DABC;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
@@ -274,12 +274,12 @@
 }
 
 .saveButton {
-  background-color: #28a745;
+  background-color: #106053;
   color: white;
 }
 
 .saveButton:hover {
-  background-color: #218838;
+  background-color: #004d47;
 }
 
 /* Responsive Styles */
@@ -338,7 +338,7 @@ font-size: 14px;
 }
 
 .faceDetectionStatus .loading {
-color: #2196F3;
+color: #004d47;
 font-style: italic;
 }
 
@@ -436,7 +436,7 @@ color: #333;
 }
 
 .readyButton {
-background-color: #4CAF50;
+background-color: #004d47;
 color: white;
 padding: 1rem 2rem;
 border: none;
