@@ -40,10 +40,6 @@ const ExamInterface = () => {
   const [faceDetectionError, setFaceDetectionError] = useState(null);
   const [faceCount, setFaceCount] = useState(0);
   const [isModelLoaded, setIsModelLoaded] = useState(false);
-  const [multipleFacesWarningShown, setMultipleFacesWarningShown] = useState(false);
-  const [noFaceWarningShown, setNoFaceWarningShown] = useState(false);
-  const [consecutiveViolations, setConsecutiveViolations] = useState(0);
-  const lastViolationTime = useRef(null);
   const faceDetectionInterval = useRef(null);
   
   const videoRef = useRef(null);
@@ -69,20 +65,14 @@ const ExamInterface = () => {
     const loadModels = async () => {
       try {
         await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-        console.log("Face detection model loaded successfully");
         setIsModelLoaded(true);
         setFaceDetectionError(null);
-        
-        if (cameraActive) {
-          startFaceDetection();
-        }
       } catch (error) {
-        console.error("Error loading face detection model:", error);
         setFaceDetectionError("Face detection model not found. Please contact support.");
       }
     };
     loadModels();
-  }, [cameraActive]);
+  }, []);
 
   // Initialize camera and start face detection
   const initializeCamera = async () => {
@@ -100,15 +90,13 @@ const ExamInterface = () => {
       
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        videoRef.current.onloadedmetadata = async () => {
-          await videoRef.current.play();
-          setCameraActive(true);
-          setCameraError(null);
-          console.log("Camera initialized successfully");
-          if (isModelLoaded) {
-            startFaceDetection();
-          }
-        };
+        await videoRef.current.play();
+        setCameraActive(true);
+        setCameraError(null);
+        console.log("Camera initialized successfully");
+        if (isModelLoaded) {
+          startFaceDetection();
+        }
       }
     } catch (err) {
       console.error("Camera error:", err);
@@ -121,74 +109,32 @@ const ExamInterface = () => {
   // Start face detection
   const startFaceDetection = () => {
     if (faceDetectionInterval.current) clearInterval(faceDetectionInterval.current);
-    
     faceDetectionInterval.current = setInterval(async () => {
-      if (videoRef.current && videoRef.current.srcObject && isModelLoaded) {
+      if (videoRef.current && videoRef.current.srcObject) {
         try {
           const detections = await faceapi.detectAllFaces(
             videoRef.current,
-            new faceapi.TinyFaceDetectorOptions({
-              inputSize: 320,
-              scoreThreshold: 0.5
-            })
+            new faceapi.TinyFaceDetectorOptions()
           );
-
           setFaceCount(detections.length);
-
           if (detections.length === 1) {
-            // Reset all warnings and violations when exactly one face is detected
             setFaceDetected(true);
             setFaceDetectionError(null);
-            setConsecutiveViolations(0);
-            setMultipleFacesWarningShown(false);
-            setNoFaceWarningShown(false);
-            lastViolationTime.current = null;
           } else {
             setFaceDetected(false);
-            const currentTime = Date.now();
-
             if (detections.length === 0) {
-              if (!noFaceWarningShown) {
-                setFaceDetectionError("No face detected! Please stay in front of the camera.");
-                setNoFaceWarningShown(true);
-                recordViolation("No face detected");
-                handleFaceViolation();
-              }
+              setFaceDetectionError("No face detected! Please stay in front of the camera.");
+              recordViolation("No face detected");
             } else if (detections.length > 1) {
-              if (!multipleFacesWarningShown) {
-                setFaceDetectionError("Multiple faces detected! Only one person is allowed.");
-                setMultipleFacesWarningShown(true);
-                recordViolation("Multiple faces detected");
-                handleFaceViolation();
-              }
+              setFaceDetectionError("Multiple faces detected! Only one person is allowed.");
+              recordViolation("Multiple faces detected");
             }
           }
         } catch (err) {
-          console.error("Face detection error:", err);
-          setFaceDetectionError("Face detection error. Please check your camera.");
+          setFaceDetectionError("Face detection error.");
         }
       }
     }, 1000);
-  };
-
-  // Handle face detection violations
-  const handleFaceViolation = () => {
-    const currentTime = Date.now();
-    
-    // If this is the first violation or it's been more than 10 seconds since the last one
-    if (!lastViolationTime.current || (currentTime - lastViolationTime.current) > 10000) {
-      setConsecutiveViolations(1);
-    } else {
-      setConsecutiveViolations(prev => prev + 1);
-    }
-
-    lastViolationTime.current = currentTime;
-
-    // If this is the second violation within 10 seconds, submit the exam
-    if (consecutiveViolations >= 1) {
-      alert("Multiple face detection violations detected. Your exam will be submitted automatically.");
-      submitExam();
-    }
   };
 
   // Stop camera and face detection
